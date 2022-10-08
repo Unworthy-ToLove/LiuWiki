@@ -1,12 +1,14 @@
-package cn.ll;
+package cn.ll.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
 @SpringBootApplication
+@ComponentScan("cn.ll")
 public class LiuWikiApplication {
     private static final Logger LOG = LoggerFactory.getLogger(LiuWikiApplication.class);
 
