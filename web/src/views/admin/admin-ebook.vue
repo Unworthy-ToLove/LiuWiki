@@ -16,7 +16,7 @@
         </template>
         <template v-slot:action="{ text, record }">
           <a-space size="small">
-            <a-button type="primary">
+            <a-button type="primary" @click="showModal">
               编辑
             </a-button>
             <a-button type="danger">
@@ -27,6 +27,16 @@
       </a-table>
     </a-layout-content>
   </a-layout>
+
+  <a-modal
+      v-model:visible="visible"
+      title="Title"
+      :confirm-loading="confirmLoading"
+      @ok="handleOk"
+  >
+    <p>{{ modalText }}</p>
+  </a-modal>
+
 </template>
 
 <script lang="ts">
@@ -121,12 +131,36 @@ export default defineComponent({
       });
     });
 
+
+    const modalText = ref<string>('test');
+    const visible = ref<boolean>(false);
+    const confirmLoading = ref<boolean>(false);
+
+    const showModal = () => {
+      visible.value = true;
+    };
+
+    const handleOk = () => {
+      modalText.value = '等一会哈';
+      confirmLoading.value = true;
+      setTimeout(() => {
+        visible.value = false;
+        confirmLoading.value = false;
+      }, 2000);
+    };
+
     return {
       ebooks,
       pagination,
       columns,
       loading,
-      handleTableChange
+      handleTableChange,
+      modalText,
+      visible,
+      confirmLoading,
+      showModal,
+      handleOk,
+
     }
   }
 });
