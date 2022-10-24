@@ -16,7 +16,7 @@
         </template>
         <template v-slot:action="{ text, record }">
           <a-space size="small">
-            <a-button type="primary" @click="showModal">
+            <a-button type="primary" @click="showModal(record)">
               编辑
             </a-button>
             <a-button type="danger">
@@ -34,7 +34,25 @@
       :confirm-loading="confirmLoading"
       @ok="handleOk"
   >
-    <p>{{ modalText }}</p>
+    <a-form :model="ebook" :label-col="{span: 6}">
+      <a-form-item label="封面">
+        <a-input v-model:value="ebook.cover" />
+      </a-form-item>
+      <a-form-item label="名称">
+        <a-input v-model:value="ebook.name" />
+      </a-form-item>
+      <a-form-item label="分类一">
+        <a-input v-model:value="ebook.category1Id" />
+      </a-form-item>
+      <a-form-item label="分类二">
+        <a-input v-model:value="ebook.category2Id" />
+      </a-form-item>
+      <a-form-item label="分类二">
+        <a-input v-model:value="ebook.desc" type="text"/>
+      </a-form-item>
+
+
+    </a-form>
   </a-modal>
 
 </template>
@@ -131,12 +149,14 @@ export default defineComponent({
       });
     });
 
-
+    // 表单
+    const ebook = ref({})
     const modalText = ref<string>('test');
     const visible = ref<boolean>(false);
     const confirmLoading = ref<boolean>(false);
 
-    const showModal = () => {
+    const showModal = (record: any) => {
+      ebook.value = record;
       visible.value = true;
     };
 
@@ -160,6 +180,7 @@ export default defineComponent({
       confirmLoading,
       showModal,
       handleOk,
+      ebook
 
     }
   }
