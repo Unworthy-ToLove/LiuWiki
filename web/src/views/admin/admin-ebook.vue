@@ -161,12 +161,22 @@ export default defineComponent({
     };
 
     const handleOk = () => {
-      modalText.value = '等一会哈';
       confirmLoading.value = true;
-      setTimeout(() => {
-        visible.value = false;
-        confirmLoading.value = false;
-      }, 2000);
+      axios.post("/ebook/save", ebook.value).then((response) => {
+        const data = response.data;  // data = commonResp
+        if(data.success){
+          visible.value = false;
+          confirmLoading.value = false;
+
+          // 重新加载列表
+          handleQuery({
+            page: pagination.value.current,
+            size: pagination.value.pageSize
+          });
+
+        }
+
+      });
     };
 
     return {

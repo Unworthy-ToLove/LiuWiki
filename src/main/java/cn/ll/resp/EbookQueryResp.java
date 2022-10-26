@@ -3,7 +3,7 @@ package cn.ll.resp;
 /**
  * @author liuli
  */
-public class EbookResp {
+public class EbookQueryResp {
     private Long id;
 
     private String name;
