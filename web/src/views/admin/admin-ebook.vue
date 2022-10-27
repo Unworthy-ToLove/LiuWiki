@@ -3,6 +3,11 @@
     <a-layout-content
         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
     >
+      <p>
+        <a-button type="primary" @click="add()" size="large">
+          新增
+        </a-button>
+      </p>
       <a-table
           :columns="columns"
           :row-key="record => record.id"
@@ -47,9 +52,7 @@
       <a-form-item label="分类二">
         <a-input v-model:value="ebook.category2Id" />
       </a-form-item>
-      <a-form-item label="分类二">
-        <a-input v-model:value="ebook.desc" type="text"/>
-      </a-form-item>
+
 
 
     </a-form>
@@ -160,6 +163,11 @@ export default defineComponent({
       visible.value = true;
     };
 
+    const add = () => {
+      ebook.value = {};
+      visible.value = true;
+    };
+
     const handleOk = () => {
       confirmLoading.value = true;
       axios.post("/ebook/save", ebook.value).then((response) => {
@@ -190,7 +198,8 @@ export default defineComponent({
       confirmLoading,
       showModal,
       handleOk,
-      ebook
+      ebook,
+      add
 
     }
   }
