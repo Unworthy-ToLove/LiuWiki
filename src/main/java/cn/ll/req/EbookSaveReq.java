@@ -1,5 +1,7 @@
 package cn.ll.req;
 
+import javax.validation.constraints.NotNull;
+
 public class EbookSaveReq {
     /**
      *
@@ -17,6 +19,7 @@ public class EbookSaveReq {
      *
      * @mbg.generated Wed Oct 12 12:00:29 CST 2022
      */
+    @NotNull(message = "名称不能为空！")
     private String name;
 
     /**
